@@ -1,3 +1,5 @@
+# Binary Search on a reserved array
+
 def binary_string_search(arr, search_string):
     start_index = 0
     end_index = len(arr)
