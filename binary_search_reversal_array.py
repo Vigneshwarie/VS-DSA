@@ -1,5 +1,6 @@
 # Binary Search on a reserved array
-
+# The function will accept a reversed array and the string that is to be searched
+# The function will output the index of the string if found else return -1
 def binary_string_search(arr, search_string):
     start_index = 0
     end_index = len(arr)
