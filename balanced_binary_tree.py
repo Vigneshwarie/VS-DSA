@@ -12,12 +12,12 @@ class TreeNode:
 
 
 def isBalanced(root: TreeNode):
-    def height(root: TreeNode):
-        if root is None:
+    def height(node: TreeNode):
+        if node is None:
             return -1
 
-        leftHeight = height(root.left)
-        rightHeight = height(root.right)
+        leftHeight = height(node.left)
+        rightHeight = height(node.right)
 
         if abs(leftHeight - rightHeight) > 1 or leftHeight == -2 or rightHeight == -2:
             return -2
@@ -35,3 +35,36 @@ mytree.left.right = TreeNode(4)
 mytree.left.left.left = TreeNode(4)
 mytree.left.right.right = TreeNode(3)
 print(isBalanced(mytree))
+
+# Bottom-Up Approach
+
+
+def isBalancedBottomUp(root: TreeNode):
+    def checkBalance(node: TreeNode):
+        if node is None:
+            return -1, True
+
+        leftHeight, leftBalanced = checkBalance(node.left)
+        rightHeight, rightBalanced = checkBalance(node.right)
+
+        if not leftBalanced or not rightBalanced:
+            return 0, False
+
+        if abs(leftHeight - rightHeight) > 1:
+            return 0, False
+
+        return max(leftHeight, rightHeight)+1, True
+
+    _, balanced = checkBalance(root)
+
+    return balanced
+
+
+mytree = TreeNode(1)
+mytree.left = TreeNode(2)
+mytree.right = TreeNode(2)
+mytree.left.left = TreeNode(3)
+mytree.left.right = TreeNode(4)
+mytree.right.left = TreeNode(4)
+mytree.right.right = TreeNode(3)
+print(isBalancedBottomUp(mytree))
